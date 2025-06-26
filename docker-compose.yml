@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+  jarvis:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jarvis-agi
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./core:/app/core
+      - ./modules:/app/modules
+      - ./config:/app/config
+      - ./tests:/app/tests
+    depends_on:
+      - redis
+    networks:
+      - jarvis-network
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: jarvis-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - jarvis-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  celery-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jarvis-celery-worker
+    command: celery -A core.celery worker --loglevel=info
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    volumes:
+      - ./core:/app/core
+      - ./modules:/app/modules
+      - ./config:/app/config
+    depends_on:
+      - redis
+    networks:
+      - jarvis-network
+    restart: unless-stopped
+
+  celery-beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jarvis-celery-beat
+    command: celery -A core.celery beat --loglevel=info
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    volumes:
+      - ./core:/app/core
+      - ./modules:/app/modules
+      - ./config:/app/config
+    depends_on:
+      - redis
+    networks:
+      - jarvis-network
+    restart: unless-stopped
+
+  flower:
+    image: mher/flower:latest
+    container_name: jarvis-flower
+    command: celery --broker=redis://redis:6379/0 flower --port=5555
+    ports:
+      - "5555:5555"
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - FLOWER_UNAUTHENTICATED_API=true
+    depends_on:
+      - redis
+    networks:
+      - jarvis-network
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+
+networks:
+  jarvis-network:
+    driver: bridge

@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(mkdir:*)",
+      "Bash(source:*)",
+      "Bash(python -m pytest tests/unit/test_base_agent.py -v)",
+      "Bash(pip install:*)",
+      "Bash(python -m pytest tests/unit/ -v --no-cov)",
+      "Bash(make:*)",
+      "Bash(mypy:*)",
+      "Bash(touch:*)",
+      "Bash(chmod:*)",
+      "Bash(/mnt/c/Users/Pascal/jarvis/.github/test-ci.sh:*)",
+      "Bash(python:*)",
+      "Bash(task-master list:*)",
+      "Bash(task-master show:*)",
+      "Bash(pytest:*)",
+      "Bash(task-master:*)"
+    ],
+    "deny": []
+  }
+}

@@ -1,0 +1,46 @@
+# Configuration for auto-assign - https://github.com/kentaro-m/auto-assign-action
+
+# Add reviewers and assignees
+addReviewers: true
+addAssignees: author
+
+# Set the number of reviewers added to the PR
+numberOfReviewers: 2
+
+# List of reviewers to be added to PRs (GitHub username)
+reviewers:
+  - reviewer1
+  - reviewer2
+  - reviewer3
+
+# List of assignees to be added to PRs (GitHub username)
+# assignees:
+#   - assignee1
+#   - assignee2
+
+# Add reviewers from different groups
+# reviewerGroups:
+#   groupA:
+#     - reviewerA1
+#     - reviewerA2
+#   groupB:
+#     - reviewerB1
+#     - reviewerB2
+
+# Set which PR types to run auto-assign on
+# Default: all types
+runOnTypes:
+  - opened
+  - ready_for_review
+
+# Exclude draft PRs
+excludeDraft: true
+
+# Keywords to exclude PRs from auto-assignment
+excludeKeywords:
+  - wip
+  - do not review
+
+# Remove assignees or reviewers
+# removeAssignees: false
+# removeReviewers: false

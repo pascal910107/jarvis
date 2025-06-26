@@ -1,0 +1,39 @@
+# Core dependencies
+celery==5.5.3
+redis==6.2.0
+PyYAML==6.0.2
+
+# Development tools
+black==25.1.0
+flake8==7.3.0
+mypy==1.16.1
+pytest==8.4.1
+pytest-cov==6.2.1
+
+# Celery dependencies
+amqp==5.3.1
+billiard==4.2.1
+click==8.2.1
+click-didyoumean==0.3.1
+click-plugins==1.1.1.2
+click-repl==0.3.0
+kombu==5.5.4
+python-dateutil==2.9.0.post0
+vine==5.1.0
+
+# Other dependencies
+iniconfig==2.1.0
+mccabe==0.7.0
+mypy_extensions==1.1.0
+packaging==25.0
+pathspec==0.12.1
+platformdirs==4.3.8
+pluggy==1.6.0
+prompt_toolkit==3.0.51
+pycodestyle==2.14.0
+pyflakes==3.4.0
+Pygments==2.19.2
+six==1.17.0
+typing_extensions==4.14.0
+tzdata==2025.2
+wcwidth==0.2.13

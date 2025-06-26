@@ -14,7 +14,8 @@ task-master models --setup                        # Configure AI models interact
 task-master list                                   # Show all tasks with status
 task-master next                                   # Get next available task to work on
 task-master show <id>                             # View detailed task information (e.g., task-master show 1.2)
-task-master set-status --id=<id> --status=done    # Mark task complete
+task-master set-status --id=<id> --status=in-progress    # Mark task as in-progress when starting
+task-master set-status --id=<id> --status=done           # Mark task complete when finished
 
 # Task Management
 task-master add-task --prompt="description" --research        # Add new task with AI assistance
@@ -152,14 +153,17 @@ If tasks already exist, another PRD can be parsed (with new information only!) u
 
 ```bash
 # Start each session
-task-master next                           # Find next available task
-task-master show <id>                     # Review task details
+task-master next                                          # Find next available task
+task-master show <id>                                    # Review task details
+
+# IMMEDIATELY mark as in-progress when starting work
+task-master set-status --id=<id> --status=in-progress    # CRITICAL: Do this first!
 
 # During implementation, check in code context into the tasks and subtasks
 task-master update-subtask --id=<id> --prompt="implementation notes..."
 
 # Complete tasks
-task-master set-status --id=<id> --status=done
+task-master set-status --id=<id> --status=done          # Mark complete when FULLY done
 ```
 
 #### 3. Multi-Claude Workflows
@@ -286,6 +290,35 @@ task-master models --set-fallback gpt-4o-mini
 
 ## Claude Code Best Practices with Task Master
 
+### Task Status Management - CRITICAL
+
+**IMPORTANT: Always update task status to maintain accurate project tracking!**
+
+1. **When Starting a Task** - IMMEDIATELY mark it as in-progress:
+   ```bash
+   task-master set-status --id=<id> --status=in-progress
+   ```
+   - Do this BEFORE beginning any implementation work
+   - Only have ONE task in-progress at a time
+
+2. **During Implementation** - Log progress continuously:
+   ```bash
+   task-master update-subtask --id=<id> --prompt="implementation notes..."
+   ```
+   - Document what you're working on
+   - Log challenges encountered
+   - Record decisions made
+
+3. **When Completing a Task** - Mark it as done:
+   ```bash
+   task-master set-status --id=<id> --status=done
+   ```
+   - Only mark as done when FULLY complete
+   - Ensure all tests pass
+   - Verify implementation meets requirements
+
+**This applies to EVERY task - no exceptions!**
+
 ### Context Management
 
 - Use `/clear` between different tasks to maintain focus
@@ -295,12 +328,14 @@ task-master models --set-fallback gpt-4o-mini
 ### Iterative Implementation
 
 1. `task-master show <subtask-id>` - Understand requirements
-2. Explore codebase and plan implementation
-3. `task-master update-subtask --id=<id> --prompt="detailed plan"` - Log plan
-4. `task-master set-status --id=<id> --status=in-progress` - Start work
+2. **`task-master set-status --id=<id> --status=in-progress`** - **CRITICAL: Mark as in-progress IMMEDIATELY**
+3. Explore codebase and plan implementation
+4. `task-master update-subtask --id=<id> --prompt="detailed plan"` - Log plan
 5. Implement code following logged plan
 6. `task-master update-subtask --id=<id> --prompt="what worked/didn't work"` - Log progress
-7. `task-master set-status --id=<id> --status=done` - Complete task
+7. **`task-master set-status --id=<id> --status=done`** - **Mark complete when FULLY done**
+
+**Remember: EVERY task must have its status updated - this ensures accurate project tracking!**
 
 ### Complex Workflows with Checklists
 
