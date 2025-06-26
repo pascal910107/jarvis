@@ -1,0 +1,1163 @@
+{
+  "product_goal": "本產品旨在打造一個類似電影《鋼鐵人》中「賈維斯」的自主智慧體（AGI Agent）架構，能夠圍繞人類指定的最終目標自主進行規劃、決策和行動，並透過不斷學習實現自我強化與成長。它具備持續運作的智能迴路，能主動感知環境、理解上下文，並像人類助理一樣長期協助完成複雜任務。核心目標是在概念上實現真正的通用人工智慧能力，包括：強大的長期記憶庫、深度推理與計畫能力、多模態感知與操作、多工具協作，以及開放的行動空間。最終，該智慧體將能靈活應對未知情境、跨領域解決問題，在諸如家庭助理、企業決策、自主科研等廣泛場景中發揮價值。",
+  "system_architecture_overview": "本系統採用分層自主智能體架構，將整體功能拆分為若干核心模組，並透過環狀迴路實現連續感知、思考與行動的循環。架構設計參考了認知科學中的「感知-計畫-行動」模式。系統上層包括目標管理與任務規劃單元，中層為推理決策引擎與記憶庫，下層為感知介面與行動執行單元，各模組透過共享的訊息總線與記憶體交互。整體流程如下：系統從使用者或環境接收目標與感知信息，經由內部規劃與推理產生行動方案，透過執行模組作用於環境，獲得反饋後更新內部狀態，如此反覆迭代直至最終目標達成。",
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Setup Core Project Infrastructure",
+        "description": "Establish the foundational project structure, development environment, and basic architectural framework for the AGI Agent system.",
+        "details": "Create a modular project structure to support the entire AGI architecture. Set up the Python/PyTorch environment, configure dependency management (e.g., Poetry/Pip), and establish robust logging and monitoring systems. Implement a flexible configuration management system for all modules (e.g., Planning, Reasoning, Memory, Perception, Action). Define abstract base classes and interfaces for core components to ensure modularity and extensibility. Set up a comprehensive testing framework (e.g., pytest) and a CI/CD pipeline for automated quality assurance.",
+        "testStrategy": "Unit tests for configuration loading, integration tests for module discovery and loading, performance tests for basic system initialization and memory usage validation.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create project structure and repository",
+            "description": "Initialize Git repository, create directory hierarchy for modular architecture including core/, modules/, tests/, docs/, and config/ directories",
+            "dependencies": [],
+            "details": "Set up .gitignore, README.md, LICENSE, and establish folder structure following Python best practices with __init__.py files and package organization",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Configure development environment",
+            "description": "Set up Python virtual environment, dependency management with poetry/pip, and development tools including linters, formatters, and pre-commit hooks",
+            "dependencies": [
+              1
+            ],
+            "details": "Create pyproject.toml or requirements.txt, configure black, flake8, mypy, and pre-commit configurations for code quality enforcement",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement base abstract classes and interfaces",
+            "description": "Design and implement core abstract base classes for agents, tools, memory systems, and communication protocols that all modules will inherit from",
+            "dependencies": [
+              2
+            ],
+            "details": "Create base classes in core/ directory including BaseAgent, BaseTool, BaseMemory, BaseProtocol with standard interfaces and abstract methods",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Set up testing framework and structure",
+            "description": "Configure pytest framework with fixtures, mocks, and test organization for unit, integration, and end-to-end testing capabilities",
+            "dependencies": [
+              3
+            ],
+            "details": "Create tests/ directory structure mirroring source code, implement base test fixtures, configure coverage reporting and test runners",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Establish CI/CD pipeline",
+            "description": "Configure GitHub Actions or similar CI/CD tool for automated testing, linting, building, and deployment workflows",
+            "dependencies": [
+              4
+            ],
+            "details": "Create workflow files for PR validation, automated testing on multiple Python versions, artifact building, and release automation",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Design distributed computing infrastructure",
+            "description": "Implement base infrastructure for distributed task execution including message queuing, worker pools, and coordination mechanisms",
+            "dependencies": [
+              3
+            ],
+            "details": "Set up Celery/RQ or custom async task queue system, implement worker base classes, and design scalable task distribution patterns",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Implement monitoring and logging framework",
+            "description": "Create centralized logging system with structured logs, metrics collection, and monitoring dashboards for system observability",
+            "dependencies": [
+              6
+            ],
+            "details": "Configure Python logging with custom formatters, integrate with monitoring tools like Prometheus/Grafana, implement performance metrics collection",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Build configuration management system",
+            "description": "Develop flexible configuration system supporting environment variables, config files, and runtime configuration updates for all modules",
+            "dependencies": [
+              3
+            ],
+            "details": "Implement configuration loader supporting YAML/JSON/env formats, create config validation schemas, and establish configuration hierarchy patterns",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Implement Reasoning and Decision Module",
+        "description": "This is the system's 'brain,' responsible for fine-grained thinking, reasoning, and real-time decision-making for each task stage. It ensures every action is logically sound and serves the long-term goal.",
+        "details": "For each sub-task, this module will use its built-in logic engine (potentially combining symbolic computation with neural networks like GPT models) to perform 'chain-of-thought' reasoning. It analyzes task-relevant information, predicts the consequences of actions, evaluates the pros and cons of different plans, and selects the optimal action for the current situation. When the environment changes or new situations arise, the module adjusts its decision-making strategy to cope with dynamic conditions.",
+        "testStrategy": "Benchmark tests comparing reasoning speed and accuracy, integration tests for neural-symbolic coordination, validation tests using logical reasoning datasets and causal inference problems.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Design System 1 Neural Architecture with LLM and MoE Components",
+            "description": "Architect the neural network foundation combining Large Language Model capabilities with Mixture of Experts for specialized reasoning domains",
+            "dependencies": [],
+            "details": "Define LLM backbone architecture, MoE routing mechanism, expert specialization domains, attention mechanisms for reasoning tasks, and integration points for System 2 components",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement System 2 Symbolic Framework Integration for SOAR/ACT-R",
+            "description": "Build the symbolic reasoning layer that integrates cognitive architectures SOAR and ACT-R for rule-based and procedural reasoning",
+            "dependencies": [],
+            "details": "Implement SOAR production system interface, ACT-R memory modules, symbolic knowledge representation formats, and inter-architecture communication protocols",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Develop Neural-Symbolic Translation Layer",
+            "description": "Create bidirectional translation mechanisms between neural representations and symbolic structures",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Build embedding converters, symbolic-to-vector encoders, attention-to-rule mappers, confidence score translation, and semantic alignment verification systems",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Build Reasoning Coordinator Implementation",
+            "description": "Implement the central coordinator that orchestrates between System 1 and System 2 components based on task requirements",
+            "dependencies": [
+              3
+            ],
+            "details": "Create task classification system, reasoning mode selector, resource allocation manager, conflict resolution mechanisms, and adaptive switching logic",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Causal Reasoning Module",
+            "description": "Develop specialized module for causal inference combining neural pattern recognition with symbolic causal graphs",
+            "dependencies": [
+              3,
+              4
+            ],
+            "details": "Build causal graph construction from neural inputs, counterfactual reasoning engine, intervention simulation system, and causal chain validation mechanisms",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Create Reasoning Chain Tracking System",
+            "description": "Implement comprehensive tracking and visualization of reasoning processes across both neural and symbolic components",
+            "dependencies": [
+              4,
+              5
+            ],
+            "details": "Design reasoning step logger, neural activation trackers, symbolic rule execution monitors, chain visualization tools, and debugging interfaces",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Optimize Performance Across Neural-Symbolic Boundary",
+            "description": "Implement performance optimizations for efficient cross-system communication and computation",
+            "dependencies": [
+              3,
+              4,
+              5
+            ],
+            "details": "Optimize translation layer caching, implement parallel processing pipelines, reduce neural-symbolic switching overhead, and create adaptive batch processing systems",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Design Comprehensive API Architecture",
+            "description": "Create unified API layer exposing dual-process reasoning capabilities with appropriate abstractions",
+            "dependencies": [
+              4,
+              5,
+              6
+            ],
+            "details": "Define RESTful endpoints, GraphQL schema for reasoning queries, streaming interfaces for reasoning chains, configuration APIs, and model management interfaces",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 9,
+            "title": "Build Testing Harness for Dual-Process System",
+            "description": "Develop comprehensive testing framework covering both neural and symbolic components and their interactions",
+            "dependencies": [
+              7,
+              8
+            ],
+            "details": "Create unit tests for individual components, integration tests for neural-symbolic boundaries, reasoning benchmark suite, performance regression tests, and ablation study framework",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 10,
+            "title": "Implement Full System Integration Layer",
+            "description": "Complete final integration bringing all components together into cohesive dual-process reasoning system",
+            "dependencies": [
+              8,
+              9
+            ],
+            "details": "Integrate all modules, implement system-wide error handling, create deployment configurations, establish monitoring infrastructure, and validate end-to-end functionality",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Develop Memory and Knowledge Module",
+        "description": "Provides the agent's long-term and short-term memory functions for storing and retrieving all task-related information, allowing the agent to accumulate experience and become more knowledgeable and efficient over time.",
+        "details": "The memory system is composed of working memory (short-term) and long-term memory. Working memory temporarily stores the current conversation context, recent observations, and intermediate reasoning results. Long-term memory persistently stores general knowledge, lessons learned, and past task records. The module provides read/write interfaces for the Reasoning Module to access memories. It also implements memory consolidation and compression mechanisms to extract key knowledge, eliminate redundancy, and prevent unlimited memory growth.",
+        "testStrategy": "Memory capacity tests for each layer, retrieval accuracy tests with various similarity metrics, consolidation tests simulating offline processing, and forgetting mechanism validation.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement sensory memory buffer",
+            "description": "Create a high-capacity, short-duration buffer for incoming sensory data with rapid decay",
+            "dependencies": [],
+            "details": "Implement a circular buffer system that stores raw sensory inputs for 0.5-4 seconds before decay. Include multi-modal support for text, audio, and visual inputs with configurable buffer sizes and decay rates.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Build working memory with attention mechanism",
+            "description": "Develop an attention-based working memory system with limited capacity and active maintenance",
+            "dependencies": [
+              1
+            ],
+            "details": "Create a 7±2 item capacity working memory using attention weights. Implement rehearsal mechanisms, interference handling, and integration with sensory buffer. Include attention scoring and item prioritization.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Create short-term conversational memory",
+            "description": "Design a conversation-aware memory system that maintains recent dialogue context",
+            "dependencies": [
+              2
+            ],
+            "details": "Build a sliding window memory for conversations with entity tracking, topic continuity, and reference resolution. Include conversation turn management and context switching capabilities.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Develop episodic memory storage",
+            "description": "Implement a system for storing and retrieving specific experiences and events",
+            "dependencies": [
+              3
+            ],
+            "details": "Create an event-based memory store with temporal indexing, context tagging, and similarity-based retrieval. Include episode boundaries, emotional salience, and reconstruction mechanisms.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Design semantic knowledge representation",
+            "description": "Build a structured knowledge graph for facts, concepts, and relationships",
+            "dependencies": [
+              4
+            ],
+            "details": "Implement a hierarchical knowledge representation with concept nodes, relationship edges, and attribute storage. Include inheritance, abstraction levels, and semantic similarity measures.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Implement procedural memory patterns",
+            "description": "Create a system for storing and executing learned procedures and skills",
+            "dependencies": [
+              5
+            ],
+            "details": "Build a pattern recognition and execution system for procedural knowledge. Include skill hierarchies, parameter adaptation, and performance optimization through practice.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Build memory encoding and retrieval system",
+            "description": "Develop mechanisms for encoding new memories and retrieving existing ones",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "details": "Create encoding pathways from sensory to long-term memory with feature extraction and compression. Implement cue-based retrieval, spreading activation, and reconstruction algorithms.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Create consolidation mechanism",
+            "description": "Implement memory consolidation processes for strengthening and integrating memories",
+            "dependencies": [
+              7
+            ],
+            "details": "Build offline and online consolidation processes including replay mechanisms, memory trace strengthening, and integration across memory systems. Include sleep-like phases and memory reorganization.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 9,
+            "title": "Develop forgetting and pruning system",
+            "description": "Design intelligent forgetting mechanisms for memory optimization and relevance",
+            "dependencies": [
+              7,
+              8
+            ],
+            "details": "Implement decay functions, interference-based forgetting, and active pruning strategies. Include relevance scoring, memory pressure management, and selective retention policies.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Build Multi-Modal Perception and Integration System",
+        "description": "Implement unified multi-modal perception capabilities for text, vision, audio, and tactile inputs with CLIP-style cross-modal alignment.",
+        "details": "Develop text processing pipeline with NLP capabilities including sentiment analysis, entity recognition, and semantic understanding. Implement computer vision module for image and video processing with object detection, scene understanding, and visual reasoning. Create audio processing system for speech recognition, music analysis, and environmental sound classification. Build tactile/haptic input processing for embodied interactions. Implement CLIP-style cross-modal alignment for unified representation learning. Create contextual understanding system that integrates multi-modal information for comprehensive scene interpretation.",
+        "testStrategy": "Individual modality accuracy tests, cross-modal alignment validation using paired datasets, integration tests with real-world multi-modal scenarios, latency tests for real-time processing requirements.",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          3
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Text Processing Pipeline (NLP)",
+            "description": "Build comprehensive natural language processing pipeline for text input handling",
+            "dependencies": [],
+            "details": "Develop tokenization, embedding generation, semantic parsing, and text feature extraction components. Include support for multiple languages and contextual understanding.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Develop Computer Vision Module",
+            "description": "Create image and video processing system with feature extraction capabilities",
+            "dependencies": [],
+            "details": "Implement image preprocessing, object detection, scene understanding, and visual feature extraction using state-of-the-art vision models.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Build Audio Processing System",
+            "description": "Design audio input handling with speech recognition and sound analysis",
+            "dependencies": [],
+            "details": "Develop audio preprocessing, speech-to-text, audio feature extraction, and acoustic scene analysis components.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Create Tactile Input Handler",
+            "description": "Implement system for processing haptic and tactile sensor data",
+            "dependencies": [],
+            "details": "Build data ingestion for tactile sensors, feature extraction for texture/pressure/temperature data, and normalization pipelines.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement CLIP-Style Alignment Model",
+            "description": "Develop contrastive learning model for cross-modal alignment",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Create shared embedding space for all modalities using contrastive learning, implement loss functions for multi-modal alignment, and train alignment model.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Build Cross-Modal Fusion Layer",
+            "description": "Design neural architecture for combining multi-modal representations",
+            "dependencies": [
+              5
+            ],
+            "details": "Implement attention mechanisms for cross-modal interaction, develop fusion strategies (early/late/hybrid), and create unified representation layer.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Integrate Contextual Understanding",
+            "description": "Add contextual reasoning and temporal coherence to multi-modal system",
+            "dependencies": [
+              6
+            ],
+            "details": "Implement memory mechanisms for temporal context, add reasoning layers for semantic understanding, and integrate world knowledge.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Optimize Real-Time Processing",
+            "description": "Enhance system performance for real-time multi-modal processing",
+            "dependencies": [
+              7
+            ],
+            "details": "Implement model quantization and pruning, optimize inference pipeline, add caching mechanisms, and ensure low-latency processing across all modalities.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Implement Goal Management, Planning, and Action Execution",
+        "description": "This module is responsible for receiving the final goal, breaking it down into executable sub-tasks, and converting the system's decisions into actual operations on the environment.",
+        "details": "It possesses human-like task decomposition and prioritization capabilities, arranging execution order based on relevance and urgency. For complex tasks, it generates multi-step plans (e.g., a tree-like task structure) and can dynamically update the plan based on feedback. The action execution component interfaces with various external 'tools' (e.g., web services, databases, robotic devices) to perform operations, ensuring the agent's intent is translated into real-world results.",
+        "testStrategy": "Planning correctness tests with various goal complexities, execution monitoring tests with simulated failures, replanning efficiency tests, and end-to-end task completion benchmarks.",
+        "priority": "high",
+        "dependencies": [
+          2,
+          3
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "HTN Task Decomposer",
+            "description": "Implement Hierarchical Task Network decomposition engine for breaking down high-level goals into primitive actions",
+            "dependencies": [],
+            "details": "Create HTN domain representation, method definitions, operator schemas, and recursive decomposition algorithm. Support compound tasks, primitive tasks, and method selection strategies",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "BDI Architecture Implementation",
+            "description": "Build Belief-Desire-Intention agent architecture for autonomous reasoning and decision-making",
+            "dependencies": [],
+            "details": "Implement belief base with world state representation, desire queue for goals, intention stack for active plans, and practical reasoning cycle. Include belief revision and intention reconsideration mechanisms",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Dynamic Planner Core",
+            "description": "Develop core planning engine that generates executable plans from goals and current world state",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Integrate HTN decomposition with BDI reasoning. Support partial-order planning, temporal constraints, resource management, and concurrent action execution. Include plan validation and optimization",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Execution Monitor",
+            "description": "Create real-time plan execution monitoring system to track action progress and detect deviations",
+            "dependencies": [
+              3
+            ],
+            "details": "Monitor action preconditions, effects, and invariants during execution. Track resource consumption, temporal constraints, and execution state. Generate execution traces and performance metrics",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Failure Detection and Recovery",
+            "description": "Implement failure detection mechanisms and recovery strategies for plan execution failures",
+            "dependencies": [
+              4
+            ],
+            "details": "Detect precondition violations, effect failures, resource conflicts, and temporal constraint violations. Implement recovery strategies: replanning, plan repair, backtracking, and graceful degradation",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Reflective Optimizer",
+            "description": "Build learning and optimization component that improves planning performance over time",
+            "dependencies": [
+              3,
+              4,
+              5
+            ],
+            "details": "Analyze execution traces to identify bottlenecks and inefficiencies. Learn operator costs, method preferences, and failure patterns. Optimize plan generation heuristics and execution strategies",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Goal Management System",
+            "description": "Develop goal lifecycle management including goal creation, prioritization, suspension, and achievement tracking",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Support goal hierarchies, mutual exclusion constraints, temporal goals, and maintenance goals. Implement goal conflict detection, priority-based scheduling, and goal achievement monitoring",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Plan Visualization Tools",
+            "description": "Create interactive visualization tools for plan structure, execution state, and system behavior",
+            "dependencies": [
+              3,
+              4,
+              7
+            ],
+            "details": "Visualize HTN decomposition trees, BDI mental states, plan graphs with temporal constraints, execution timelines, and goal achievement progress. Support debugging and analysis workflows",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 9,
+            "title": "Conflict Resolution Mechanism",
+            "description": "Implement sophisticated conflict detection and resolution for competing goals, resource contention, and plan interactions",
+            "dependencies": [
+              3,
+              7
+            ],
+            "details": "Detect resource conflicts, temporal overlaps, logical inconsistencies, and goal conflicts. Implement resolution strategies: negotiation, prioritization, plan merging, and constraint relaxation",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Implement World Model and Causal Reasoning",
+        "description": "Build a comprehensive world model including physical, social, and causal models for environment understanding and future state prediction.",
+        "details": "Implement a physical world model using architectures like Dreamer/PlaNet for learning environment dynamics. Create a social model for understanding human behavior patterns and social norms. Develop a causal model that learns cause-effect relationships using structural causal modeling techniques. Build a prediction engine for forecasting future states and implement counterfactual reasoning for 'what-if' analysis. The model must continuously update with new observations.",
+        "testStrategy": "Physical prediction accuracy tests in simulated environments, social behavior prediction validation, causal relationship discovery tests, and counterfactual reasoning validation.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          4
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Physical World Model (Dreamer/PlaNet)",
+            "description": "Build a latent dynamics model that learns compact representations of physical environments and predicts future states",
+            "dependencies": [],
+            "details": "Implement either Dreamer v3 or PlaNet architecture with recurrent state-space models, stochastic latent variables, and deterministic hidden states. Include observation encoder/decoder, dynamics predictor, and reward predictor components",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Create Social Behavior Model",
+            "description": "Develop a model that captures and predicts social interactions, agent intentions, and multi-agent dynamics",
+            "dependencies": [],
+            "details": "Build theory of mind components, social graph representations, intention recognition modules, and multi-agent behavior prediction. Include modeling of cooperation, competition, and communication patterns",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement Causal Graph Learning",
+            "description": "Build algorithms to discover causal relationships between variables in the environment from observational and interventional data",
+            "dependencies": [],
+            "details": "Implement causal discovery algorithms like PC, GES, or NOTEARS. Include structure learning, causal effect estimation, and handling of confounders. Support both discrete and continuous variables",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Build Prediction Engine",
+            "description": "Create a unified prediction system that leverages physical, social, and causal models for multi-step forecasting",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Integrate world models with ensemble methods, implement rollout mechanisms, handle different prediction horizons, and combine predictions from multiple model types with appropriate weighting",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Develop Counterfactual Reasoning Module",
+            "description": "Implement algorithms for counterfactual inference to answer 'what-if' questions about alternative actions or scenarios",
+            "dependencies": [
+              3,
+              4
+            ],
+            "details": "Build counterfactual generation using structural causal models, implement twin network approaches, create intervention simulators, and develop counterfactual explanation generation",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Create Model Update Mechanisms",
+            "description": "Design adaptive learning systems that continuously update world models based on new experiences and feedback",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Implement online learning algorithms, experience replay with prioritization, model disagreement detection, active learning for targeted exploration, and catastrophic forgetting prevention",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Implement Uncertainty Quantification",
+            "description": "Build comprehensive uncertainty estimation for all model components including epistemic and aleatoric uncertainty",
+            "dependencies": [
+              4,
+              5
+            ],
+            "details": "Implement Bayesian neural networks, ensemble uncertainty, prediction intervals, uncertainty propagation through causal graphs, and confidence calibration methods",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Develop Model Visualization and Debugging Tools",
+            "description": "Create interactive visualization and analysis tools for understanding, debugging, and explaining world model behaviors",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "details": "Build latent space visualizers, causal graph renderers, prediction trajectory plots, uncertainty heatmaps, counterfactual comparison views, and model disagreement analyzers",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Develop Continuous Learning and Self-Optimization Framework",
+        "description": "This module gives the agent the ability to self-reflect and improve, which is key to its long-term growth. It enables the agent to 'get smarter with use.'",
+        "details": "This module continuously monitors the agent's internal state and external performance, evaluating the effectiveness of current plans and actions. If it detects deviations (e.g., task failure), it triggers a 'reflection mechanism' to analyze the cause of failure and feeds insights back to the Planning and Reasoning modules to correct strategies in the next cycle. This includes real-time learning, offline deep learning from accumulated experience, and module evolution to incorporate new technologies.",
+        "testStrategy": "Learning efficiency tests with few-shot scenarios, adaptation speed tests in new domains, knowledge retention tests, and meta-learning improvement measurement.",
+        "priority": "medium",
+        "dependencies": [
+          3,
+          5,
+          6
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Experience Collection System",
+            "description": "Create a system to capture and store agent experiences including state-action pairs, outcomes, and contextual information",
+            "dependencies": [],
+            "details": "Design data structures for experience storage, implement experience buffer with configurable retention policies, create APIs for experience submission from various agent components, and ensure efficient serialization/deserialization",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Build Reflection and Pattern Extraction Module",
+            "description": "Develop algorithms to analyze collected experiences and extract meaningful patterns, insights, and generalizable knowledge",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement statistical analysis for pattern detection, create clustering algorithms for similar experiences, develop anomaly detection for unusual patterns, and build summarization techniques for experience compression",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Design Knowledge Integration Mechanism",
+            "description": "Create a system to integrate extracted patterns and insights into the agent's existing knowledge base without catastrophic forgetting",
+            "dependencies": [
+              2
+            ],
+            "details": "Implement elastic weight consolidation or similar techniques, design knowledge graph updates with conflict resolution, create incremental learning strategies, and develop knowledge versioning system",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Develop Experience-based Learning Engine",
+            "description": "Build a learning system that can improve agent behavior based on past experiences and outcomes",
+            "dependencies": [
+              1,
+              3
+            ],
+            "details": "Create experience replay mechanisms, implement prioritized experience sampling, develop credit assignment algorithms, and build performance metrics for learning effectiveness",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Create Imitation Learning Pipeline",
+            "description": "Implement a system for the agent to learn from demonstrations or examples of successful behavior",
+            "dependencies": [
+              1
+            ],
+            "details": "Build demonstration recording and parsing system, implement behavioral cloning algorithms, create inverse reinforcement learning components, and develop demonstration quality assessment metrics",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Implement Reinforcement Learning Module",
+            "description": "Develop a reinforcement learning system for the agent to learn optimal policies through trial and error",
+            "dependencies": [
+              1,
+              4
+            ],
+            "details": "Implement value-based and policy-based RL algorithms, create reward shaping mechanisms, develop exploration strategies, and build safe RL constraints to prevent harmful actions",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Build Meta-Learning Optimizer",
+            "description": "Create a meta-learning system that learns how to learn more efficiently across different tasks and domains",
+            "dependencies": [
+              4,
+              5,
+              6
+            ],
+            "details": "Implement model-agnostic meta-learning (MAML) or similar algorithms, develop task distribution modeling, create few-shot learning capabilities, and build transfer learning mechanisms",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Design Active Learning Strategy System",
+            "description": "Implement strategies for the agent to actively seek out learning opportunities and identify knowledge gaps",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Create uncertainty estimation methods, implement query generation for information seeking, develop curiosity-driven exploration, and build cost-benefit analysis for learning actions",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 9,
+            "title": "Create Knowledge Validation and Testing Framework",
+            "description": "Build a comprehensive system to validate learned knowledge and ensure continuous improvement without degradation",
+            "dependencies": [
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "details": "Implement automated testing of learned behaviors, create regression detection mechanisms, develop performance benchmarking suite, and build knowledge consistency verification tools",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Build Natural Interaction Interfaces",
+        "description": "Create an intuitive multi-modal interaction system with voice, text, gesture recognition, contextual awareness, and personalized adaptation.",
+        "details": "Implement natural language processing for conversational interactions with context awareness and dialogue management. Create a voice interface with speech recognition, NLU, and speech synthesis. Build gesture and facial expression recognition for non-verbal communication. Develop a contextual awareness system that understands user state, environment, and situational factors. Implement a personalization system that learns user preferences and communication styles. Create proactive interaction capabilities to provide timely assistance.",
+        "testStrategy": "Conversation quality tests with human evaluators, voice recognition accuracy in various conditions, gesture recognition precision tests, context understanding validation, and user satisfaction surveys.",
+        "priority": "medium",
+        "dependencies": [
+          4,
+          7
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Conversational NLP Interface",
+            "description": "Build natural language processing system for understanding and generating human-like conversations",
+            "dependencies": [],
+            "details": "Develop intent recognition, entity extraction, dialogue management, and response generation components. Integrate with language models for context-aware conversations.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Develop Voice Recognition and Synthesis System",
+            "description": "Create voice input/output capabilities for speech-based interactions",
+            "dependencies": [],
+            "details": "Implement speech-to-text engine, text-to-speech synthesis with natural prosody, voice activity detection, and multi-speaker identification.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Build Gesture Recognition System",
+            "description": "Develop computer vision system to interpret human gestures and body language",
+            "dependencies": [],
+            "details": "Create pose estimation, hand tracking, gesture classification, and real-time gesture interpretation modules using camera inputs.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Create Facial Expression Analysis Module",
+            "description": "Implement facial recognition and emotion detection capabilities",
+            "dependencies": [],
+            "details": "Develop facial landmark detection, emotion classification, micro-expression analysis, and gaze tracking components for understanding user emotional states.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Develop Contextual Awareness Module",
+            "description": "Build system to understand and maintain context across interactions",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Create context modeling, situation awareness, environmental understanding, and cross-modal context fusion to enable appropriate responses.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Implement Personalization Engine",
+            "description": "Create adaptive system that learns and personalizes to individual users",
+            "dependencies": [
+              1,
+              5
+            ],
+            "details": "Build user profiling, preference learning, behavior adaptation, and personalized response generation based on interaction history.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Build Proactive Interaction System",
+            "description": "Develop capability for AI to initiate relevant interactions",
+            "dependencies": [
+              5,
+              6
+            ],
+            "details": "Implement opportunity detection, relevance scoring, timing optimization, and proactive suggestion generation based on context and user patterns.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Create Collaborative Task Coordination System",
+            "description": "Enable AI to work cooperatively with users on complex tasks",
+            "dependencies": [
+              1,
+              5,
+              7
+            ],
+            "details": "Develop task decomposition, role assignment, progress tracking, and collaborative planning capabilities for human-AI teamwork.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Implement Multi-Layer Security, Safety, and Ethics Framework",
+        "description": "Build a comprehensive security and safety system with Constitutional AI, behavior monitoring, human oversight, and emergency protocols to minimize risks and ensure trustworthy operation.",
+        "details": "Implement a multi-layer security architecture: 1) Hardcoded safety rules (immutable), 2) Constitutional AI for value alignment, 3) Behavior monitoring with anomaly detection, 4) Human supervision interfaces, and 5) Emergency stop protocols. This includes a decision tracking system, causal explanations for actions, uncertainty expression, comprehensive audit logging, and robust privacy protection mechanisms (data minimization, encryption, user control). The goal is to ensure the agent is safe, reliable, and aligned with human values.",
+        "testStrategy": "Security penetration testing, value alignment validation with ethical scenarios, behavior monitoring accuracy tests, human oversight interface usability tests, and privacy compliance audits.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2,
+          5
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement hardcoded safety rules implementation",
+            "description": "Create a robust system for defining and enforcing non-negotiable safety constraints that prevent harmful actions",
+            "dependencies": [],
+            "details": "Design rule engine for safety constraints, implement rule validation system, create configuration interface for safety rules, add real-time rule enforcement during AI decision-making, implement override protection mechanisms",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Build Constitutional AI framework",
+            "description": "Develop a principles-based AI alignment system that guides behavior through constitutional values",
+            "dependencies": [
+              1
+            ],
+            "details": "Define constitutional principles hierarchy, implement principle evaluation engine, create conflict resolution mechanisms, build principle learning system, integrate with decision-making pipeline",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Create behavior anomaly detection system",
+            "description": "Build machine learning models to detect unusual or potentially harmful AI behaviors in real-time",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement baseline behavior profiling, create anomaly detection algorithms, build real-time monitoring pipeline, develop alert thresholds and escalation, integrate with safety rule system",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Design human oversight interfaces",
+            "description": "Create intuitive interfaces for human operators to monitor and intervene in AI operations",
+            "dependencies": [
+              3
+            ],
+            "details": "Build real-time monitoring dashboard, implement intervention controls, create approval workflow system, design alert notification system, develop operator training materials",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement emergency stop protocols",
+            "description": "Create fail-safe mechanisms to immediately halt AI operations when safety risks are detected",
+            "dependencies": [
+              1,
+              3
+            ],
+            "details": "Design multi-level shutdown procedures, implement graceful degradation systems, create manual override controls, build state preservation for recovery, test emergency scenarios",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Build decision tracking system",
+            "description": "Create comprehensive logging of all AI decisions with full context and rationale",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Implement decision capture pipeline, create structured logging format, build decision replay capability, develop search and query interface, integrate with audit system",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Develop causal explanation generator",
+            "description": "Build interpretability tools that explain AI decisions in terms of causal relationships",
+            "dependencies": [
+              6
+            ],
+            "details": "Implement causal graph construction, create explanation generation algorithms, build natural language explanation system, develop visualization tools, validate explanation accuracy",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Create uncertainty quantification module",
+            "description": "Implement systems to measure and communicate AI confidence levels and uncertainty",
+            "dependencies": [
+              2,
+              6
+            ],
+            "details": "Build probabilistic reasoning framework, implement confidence scoring algorithms, create uncertainty visualization, develop threshold-based actions, integrate with decision system",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 9,
+            "title": "Build audit logging infrastructure",
+            "description": "Create tamper-proof logging system for all safety-relevant events and decisions",
+            "dependencies": [
+              6
+            ],
+            "details": "Implement immutable logging architecture, create cryptographic verification, build log analysis tools, develop compliance reporting, ensure regulatory adherence",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 10,
+            "title": "Implement privacy protection module",
+            "description": "Build comprehensive privacy safeguards for all data processed by the AI system",
+            "dependencies": [
+              1,
+              9
+            ],
+            "details": "Implement data anonymization techniques, create differential privacy mechanisms, build consent management system, develop data retention policies, ensure GDPR/CCPA compliance",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Create Self-Evolution and Improvement System",
+        "description": "Implement controlled self-modification capabilities with a Constitutional AI framework, recursive improvement, and capability expansion mechanisms, ensuring the system evolves safely and effectively.",
+        "details": "Build a Constitutional AI framework with predefined, non-overridable ethical and behavioral guidelines. Implement a self-criticism system to evaluate output quality against internal standards. Create a self-improvement mechanism that optimizes behavior based on feedback within strict safety boundaries. Develop limited, safe code self-modification for performance optimization. Implement dynamic architecture adjustment and a capability expansion system that acquires new skills while ensuring alignment with core values.",
+        "testStrategy": "Constitutional constraint validation tests, self-improvement effectiveness measurement, code modification safety tests, and long-term stability monitoring.",
+        "priority": "low",
+        "dependencies": [
+          2,
+          7,
+          9
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Design Constitutional AI constraint system",
+            "description": "Create a robust framework for defining and enforcing safety constraints that guide all self-modification decisions",
+            "dependencies": [],
+            "details": "Implement hard constraints for value alignment, safety boundaries, and modification limits. Include formal verification methods for constraint satisfaction and multi-layered validation systems",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement self-criticism evaluation module",
+            "description": "Build system for AI to critically evaluate its own outputs, decisions, and proposed modifications",
+            "dependencies": [
+              1
+            ],
+            "details": "Develop adversarial self-testing, bias detection, failure mode analysis, and performance regression testing. Include mechanisms for identifying edge cases and potential harm scenarios",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Create feedback-based improvement mechanism",
+            "description": "Design system to collect, process, and integrate feedback for continuous improvement",
+            "dependencies": [
+              2
+            ],
+            "details": "Implement multi-source feedback collection (user, automated metrics, self-evaluation), weighted feedback aggregation, and safe integration protocols with validation before applying changes",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Build safe code modification system",
+            "description": "Develop secure mechanisms for modifying system code while maintaining safety guarantees",
+            "dependencies": [
+              1,
+              3
+            ],
+            "details": "Create sandboxed testing environments, formal proof systems for modifications, gradual rollout mechanisms, and cryptographic signing for authorized changes with immutable audit logs",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement dynamic architecture adjustment",
+            "description": "Create framework for safely modifying system architecture and adding new components",
+            "dependencies": [
+              4
+            ],
+            "details": "Design modular architecture with safe insertion points, dependency management, resource allocation controls, and architectural invariant preservation during modifications",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Develop capability expansion framework",
+            "description": "Build system for safely adding new capabilities while preventing harmful emergent behaviors",
+            "dependencies": [
+              5
+            ],
+            "details": "Implement capability isolation, staged testing protocols, interaction effect analysis, and conservative expansion policies with mandatory safety reviews for new capabilities",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Create safety verification system",
+            "description": "Implement comprehensive safety testing and verification for all modifications",
+            "dependencies": [
+              2,
+              6
+            ],
+            "details": "Build formal verification tools, adversarial testing frameworks, value alignment checks, and multi-agent safety reviews with Byzantine fault tolerance",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Implement performance monitoring system",
+            "description": "Create real-time monitoring for system health, safety metrics, and performance indicators",
+            "dependencies": [
+              7
+            ],
+            "details": "Deploy comprehensive telemetry, anomaly detection, performance regression tracking, and safety metric dashboards with automated alerting for constraint violations",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 9,
+            "title": "Build rollback mechanisms",
+            "description": "Develop fail-safe systems to revert modifications if safety issues are detected",
+            "dependencies": [
+              4,
+              8
+            ],
+            "details": "Implement versioned state management, instant rollback triggers, partial rollback capabilities, and guaranteed recovery paths with minimal service disruption",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 10,
+            "title": "Establish long-term stability assurance",
+            "description": "Create systems to prevent value drift and maintain alignment over extended self-modification cycles",
+            "dependencies": [
+              1,
+              7,
+              9
+            ],
+            "details": "Implement value lock-in mechanisms, drift detection algorithms, periodic alignment verification, and immutable core value preservation with mathematical guarantees",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-06-26T05:31:27.694Z",
+      "updated": "2025-06-26T08:00:00.000Z",
+      "description": "Tasks for master context, updated with product vision."
+    }
+  }
+}
