@@ -1,0 +1,109 @@
+# Alert rules for Jarvis AGI system
+
+groups:
+  - name: agi_performance
+    interval: 30s
+    rules:
+      # Perception latency alert
+      - alert: HighPerceptionLatency
+        expr: perception_latency_ms > 100
+        for: 1m
+        labels:
+          severity: critical
+          component: perception
+        annotations:
+          summary: "Perception latency exceeds 100ms threshold"
+          description: "Perception latency is {{ $value }}ms, exceeding AGI real-time requirement of 100ms"
+      
+      # Reasoning latency alerts
+      - alert: HighSystem1Latency
+        expr: reasoning_latency_ms{system="1"} > 50
+        for: 1m
+        labels:
+          severity: warning
+          component: reasoning
+        annotations:
+          summary: "System 1 reasoning latency exceeds 50ms"
+          description: "System 1 (intuitive) reasoning latency is {{ $value }}ms"
+      
+      - alert: HighSystem2Latency
+        expr: reasoning_latency_ms{system="2"} > 500
+        for: 1m
+        labels:
+          severity: warning
+          component: reasoning
+        annotations:
+          summary: "System 2 reasoning latency exceeds 500ms"
+          description: "System 2 (deliberative) reasoning latency is {{ $value }}ms"
+      
+      # Memory access latency alert
+      - alert: HighMemoryLatency
+        expr: memory_access_latency_ms{type="working"} > 10
+        for: 1m
+        labels:
+          severity: critical
+          component: memory
+        annotations:
+          summary: "Working memory access latency exceeds 10ms"
+          description: "Working memory access latency is {{ $value }}ms"
+
+  - name: agi_resources
+    interval: 30s
+    rules:
+      # High cognitive load
+      - alert: HighCognitiveLoad
+        expr: cognitive_load_percent > 80
+        for: 5m
+        labels:
+          severity: warning
+          component: cognitive
+        annotations:
+          summary: "Cognitive load is high"
+          description: "Cognitive load is at {{ $value }}%, consider scaling resources"
+      
+      # Task queue buildup
+      - alert: TaskQueueBacklog
+        expr: queue_size > 1000
+        for: 5m
+        labels:
+          severity: warning
+          component: distributed
+        annotations:
+          summary: "Task queue has significant backlog"
+          description: "Task queue size is {{ $value }}, tasks may be delayed"
+      
+      # Worker availability
+      - alert: InsufficientWorkers
+        expr: active_workers < 2
+        for: 2m
+        labels:
+          severity: critical
+          component: distributed
+        annotations:
+          summary: "Insufficient active workers"
+          description: "Only {{ $value }} workers active, system may be unable to process tasks"
+
+  - name: agi_health
+    interval: 30s
+    rules:
+      # High task failure rate
+      - alert: HighTaskFailureRate
+        expr: rate(tasks_failed_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          component: execution
+        annotations:
+          summary: "High task failure rate detected"
+          description: "Task failure rate is {{ $value }} per second"
+      
+      # Low consciousness level
+      - alert: LowConsciousnessLevel
+        expr: consciousness_level < 0.3
+        for: 10m
+        labels:
+          severity: info
+          component: cognitive
+        annotations:
+          summary: "Consciousness level is low"
+          description: "Consciousness level is {{ $value }}, system may have reduced self-awareness"

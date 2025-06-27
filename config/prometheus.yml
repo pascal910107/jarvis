@@ -1,0 +1,35 @@
+# Prometheus configuration for Jarvis AGI monitoring
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  scrape_timeout: 10s
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - localhost:9093
+
+# Load rules once and periodically evaluate them
+rule_files:
+  - "alerts/*.yml"
+
+# Scrape configurations
+scrape_configs:
+  # Jarvis AGI metrics
+  - job_name: 'jarvis-agi'
+    static_configs:
+      - targets: ['localhost:9090']
+    metrics_path: '/metrics'
+    
+  # Node exporter for system metrics (optional)
+  - job_name: 'node'
+    static_configs:
+      - targets: ['localhost:9100']
+    
+  # GPU metrics (optional, requires nvidia_gpu_exporter)
+  - job_name: 'gpu'
+    static_configs:
+      - targets: ['localhost:9835']

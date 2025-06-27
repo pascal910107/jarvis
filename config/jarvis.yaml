@@ -1,0 +1,134 @@
+# Jarvis AGI System Configuration
+
+# Server configuration
+server:
+  host: ${JARVIS_HOST:-localhost}
+  port: ${JARVIS_PORT:-8080}
+  workers: 4
+  debug: ${JARVIS_DEBUG:-false}
+
+# Cognitive architecture settings
+cognitive:
+  # Perception layer
+  perception:
+    latency_threshold_ms: 100
+    batch_size: 32
+    models:
+      vision: "resnet50"
+      audio: "wav2vec2"
+      text: "bert-base"
+  
+  # Reasoning layer
+  reasoning:
+    system1:
+      enabled: true
+      latency_threshold_ms: 50
+      confidence_threshold: 0.8
+    system2:
+      enabled: true
+      latency_threshold_ms: 500
+      max_depth: 15
+      beam_width: 5
+  
+  # Memory configuration
+  memory:
+    working:
+      capacity: 1000
+      ttl_seconds: 300
+    episodic:
+      capacity: 10000
+      consolidation_interval: 3600
+    semantic:
+      embedding_dim: 768
+      index_type: "hnsw"
+  
+  # Learning parameters
+  learning:
+    rate: 0.001
+    batch_size: 64
+    update_frequency: 100
+
+# Distributed system configuration
+distributed:
+  redis:
+    host: ${REDIS_HOST:-localhost}
+    port: ${REDIS_PORT:-6379}
+    db: 0
+    password: ${REDIS_PASSWORD:-}
+  
+  celery:
+    broker_url: "redis://${REDIS_HOST:-localhost}:${REDIS_PORT:-6379}/0"
+    result_backend: "redis://${REDIS_HOST:-localhost}:${REDIS_PORT:-6379}/1"
+    task_serializer: "json"
+    result_serializer: "json"
+    timezone: "UTC"
+    enable_utc: true
+  
+  consensus:
+    algorithm: "raft"
+    heartbeat_interval: 100
+    election_timeout: 1000
+
+# Monitoring configuration
+monitoring:
+  prometheus:
+    enabled: true
+    port: 9090
+    scrape_interval: 15
+  
+  logging:
+    level: ${LOG_LEVEL:-INFO}
+    structured: true
+    file: "logs/jarvis.log"
+    max_size_mb: 100
+    backup_count: 5
+  
+  health_checks:
+    interval: 30
+    timeout: 10
+  
+  alerts:
+    email:
+      enabled: false
+      smtp_host: ${SMTP_HOST:-}
+      recipients: []
+    webhook:
+      enabled: false
+      url: ${ALERT_WEBHOOK_URL:-}
+
+# Hardware configuration
+hardware:
+  gpu:
+    enabled: ${USE_GPU:-false}
+    device_ids: [0]
+    memory_fraction: 0.8
+  
+  cpu:
+    threads: ${CPU_THREADS:-4}
+    affinity: []
+
+# Security configuration
+security:
+  api_key: ${JARVIS_API_KEY:?API key is required}
+  jwt:
+    secret: ${JWT_SECRET:?JWT secret is required}
+    algorithm: "HS256"
+    expiry_hours: 24
+  
+  cors:
+    enabled: true
+    origins: ["http://localhost:3000"]
+    credentials: true
+
+# Feature flags
+features:
+  experimental:
+    quantum_reasoning: false
+    neural_architecture_search: false
+  
+  modules:
+    perception: true
+    reasoning: true
+    memory: true
+    planning: true
+    action: true

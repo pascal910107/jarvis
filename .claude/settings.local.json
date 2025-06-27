@@ -16,7 +16,8 @@
       "Bash(task-master list:*)",
       "Bash(task-master show:*)",
       "Bash(pytest:*)",
-      "Bash(task-master:*)"
+      "Bash(task-master:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }
